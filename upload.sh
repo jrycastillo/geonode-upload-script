@@ -1,9 +1,11 @@
-
 #! /usr/bin/bash
 
-read -p "GeoServer Username: " username
-echo "GeoServer Password: "
-read -s password
+read -p "GeoServer Username: " username;
+read -sp "GeoServer Password: " password;
+
+# while read username password; do
+# curl -iL --data-urlencode  username=$username --data-urlencode password=$password http://192.168.6.113/geoserver/web
+# done
 
 import_id=$(curl -s -u $username:$password -XPOST -H "Content-type: application/json" -d @import.json "http://192.168.6.113/geoserver/rest/imports" | jq '.import.id')
 
